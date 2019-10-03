@@ -9,10 +9,11 @@
   // return chooseName;
 // } const name();
 
-	// $('#Play').on('click', () => {
- //  		console.log('button works')
- // 	 	startGame();
-	// };
+// const img = $("<image/>");
+
+
+
+
 function nameTamo() {
  		let chooseName = prompt("Welcome to your new world! Please enter your Tomagotchi's name!");
  		$("#nameMetric").append(chooseName);
@@ -22,21 +23,59 @@ function nameTamo() {
 class Tomo {
 	constructor(name, age, hunger, sleepiness, boredom) {
 		this.name = "George"
-		this.age = 1
-		this.hunger = 2
-		this.sleepiness = 3
-		this.boredom = 4
+		this.age = 0
+		this.hunger = 0
+		this.sleepiness = 0
+		this.boredom = 0
 	}
 
 
+
 	 startGame() {
-	 	//nameTamo();					//because it's inside a class, you have to reference any properties or references by 'this.'
+	 	//nameTamo();		//because it's inside a class, you have to reference any properties or references by 'this.'
 		this.updateHunger();
 		this.updateSleepiness();
 		this.updateBoredom();
+		this.updateAge();
+		//this.morphToma();
 	} 
 
 
+	morphToma() {
+	const img = $("<img/>");
+	if (this.age > 2) {
+		console.log('hi');
+		img.attr('src', 'https://i.imgur.com/kIlhQrU.jpg');
+		} if (this.age > 5) {
+			img.attr('src', 'https://img.rankedboost.com/wp-content/plugins/ice/riot/poksimages/poks7new/76_Alolan%20Golem.png');
+		}
+	}
+
+
+	updateAge() {
+		console.log(this.age);
+		const tomoScope = this			//because icnreasehuger is different scope than update hunger, we need tomoscope to pull 'this.hunger value'
+
+		const ageCounter = setInterval(increaseAge, 1200);
+		function increaseAge() {
+			//const ageMetric = $("#ageMetric");
+			//ageMetric.html(`Age: ${newAge++}`);
+			//console.log(this.hunger);
+			tomoScope.age++;	//directly affecting constructor
+			$("#ageMetric").html(`Age: ${tomoScope.age}`);
+			
+			const img = $("<img/>");
+			if (tomoScope.age > 5) {
+				console.log('hi');
+				$('img').attr('src', 'https://i.imgur.com/OV0K9h3.png')
+				$('img').css("height", "400px");
+			} 
+							// if (this.age > 5 ) {
+							// img.attr('src', 'https://img.rankedboost.com/wp-content/plugins/ice/riot/poksimages/poks7new/76_Alolan%20Golem.png');
+							// }
+				
+		}		
+	}
 
 
 
@@ -52,13 +91,17 @@ class Tomo {
 		console.log(this.hunger);
 		const tomoScope = this			//because icnreasehuger is different scope than update hunger, we need tomoscope to pull 'this.hunger value'
 
-		const hungerCounter = setInterval(increaseHunger, 1000);
+		const hungerCounter = setInterval(increaseHunger, 2200);
 		function increaseHunger() {
 			//const ageMetric = $("#ageMetric");
 			//ageMetric.html(`Age: ${newAge++}`);
 			//console.log(this.hunger);
 			tomoScope.hunger++;	//directly affecting constructor
 			$("#hungerMetric").html(`Hunger: ${tomoScope.hunger}`);
+				if (tomoScope.hunger === 11) {
+					alert(`You have let ${tomoScope.name} starve to death! Press OK to start again!`);
+					location.reload();
+				}
 		}
 	
 	}
@@ -75,13 +118,17 @@ class Tomo {
 		console.log(this.sleepiness);
 		const tomoScope = this			//because icnreasehuger is different scope than update hunger, we need tomoscope to pull 'this.hunger value'
 
-		const sleepinessCounter = setInterval(increaseSleepiness, 1000);
+		const sleepinessCounter = setInterval(increaseSleepiness, 1390);
 		function increaseSleepiness() {
 			//const ageMetric = $("#ageMetric");
 			//ageMetric.html(`Age: ${newAge++}`);
 			//console.log(this.hunger);
 			tomoScope.sleepiness++;	//directly affecting constructor
 			$("#sleepinessMetric").html(`Sleepiness: ${tomoScope.sleepiness}`);
+				if (tomoScope.sleepiness === 11) {
+					alert(`You have let ${tomoScope.name} die of exhaustion! Press OK to start again!`);
+					location.reload();
+				}
 		}
 	
 	}
@@ -89,37 +136,40 @@ class Tomo {
 
 	updateBoredom(){
 		//const hungerCounter = setInterval(increaseHunger, 1000);
+		console.log("updateBoredom called");
 		$('#Play').on('click', () => {
-		console.log('play with pet');
-		this.boredom--;  //directly affecting constructor
-		$("#boredomMetric").html(`Boredom: ${this.boredom}`);
-
+			console.log('play with pet');
+			this.boredom--;  //directly affecting constructor
+			$("#boredomMetric").html(`Boredom: ${this.boredom}`);
 		});
 
 		console.log(this.boredom);
 		const tomoScope = this			//because icnreasehuger is different scope than update hunger, we need tomoscope to pull 'this.hunger value'
 
-		const boredomCounter = setInterval(increaseBoredom, 1000);
+		const boredomCounter = setInterval(increaseBoredom, 800);
 		function increaseBoredom() {
 			//const ageMetric = $("#ageMetric");
 			//ageMetric.html(`Age: ${newAge++}`);
 			//console.log(this.hunger);
 			tomoScope.boredom++;	//directly affecting constructor
-			$("#boredomMetric").html(`boredom: ${tomoScope.boredom}`);
+			$("#boredomMetric").html(`Boredom: ${tomoScope.boredom}`);
+				if (tomoScope.boredom === 11) {
+					alert(`You have let ${tomoScope.name} die of boredom! Press OK to start again!`);
+					location.reload();
+				}
 		}
 	
 	}
 
-
-
-
-
-
-
 }
-const newTomo = new Tomo();
+const newTomo = new Tomo();		//instantiating the class
 
 
+//Click to start game
+	$('#Start').on('click', () => {
+  		console.log('button works')
+ 	 	newTomo.startGame();		//pulls the method from the class by using newTomo which instantiated it
+	});									//stargame fucntion comes after because if its before it hasnt been created
 
 
 
