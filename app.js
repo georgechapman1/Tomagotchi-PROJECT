@@ -10,7 +10,7 @@
 // } const name();
 
 // const img = $("<image/>");
-
+			const img = $("<img/>");
 
 
 
@@ -64,7 +64,7 @@ class Tomo {
 			tomoScope.age++;	//directly affecting constructor
 			$("#ageMetric").html(`Age: ${tomoScope.age}`);
 			
-			const img = $("<img/>");
+			// const img = $("<img/>");
 			if (tomoScope.age > 5) {
 				console.log('hi');
 				$('img').attr('src', 'https://i.imgur.com/OV0K9h3.png')
@@ -91,14 +91,15 @@ class Tomo {
 		console.log(this.hunger);
 		const tomoScope = this			//because icnreasehuger is different scope than update hunger, we need tomoscope to pull 'this.hunger value'
 
-		const hungerCounter = setInterval(increaseHunger, 2200);
+		const hungerCounter = setInterval(increaseHunger, 900);
 		function increaseHunger() {
 			//const ageMetric = $("#ageMetric");
 			//ageMetric.html(`Age: ${newAge++}`);
 			//console.log(this.hunger);
 			tomoScope.hunger++;	//directly affecting constructor
 			$("#hungerMetric").html(`Hunger: ${tomoScope.hunger}`);
-				if (tomoScope.hunger === 11) {
+				if (tomoScope.hunger === 10) {
+					$('img').css("transform", "rotate(90deg");
 					alert(`You have let ${tomoScope.name} starve to death! Press OK to start again!`);
 					location.reload();
 				}
@@ -126,6 +127,7 @@ class Tomo {
 			tomoScope.sleepiness++;	//directly affecting constructor
 			$("#sleepinessMetric").html(`Sleepiness: ${tomoScope.sleepiness}`);
 				if (tomoScope.sleepiness === 11) {
+					$('img').css("transform", "rotate(90deg");
 					alert(`You have let ${tomoScope.name} die of exhaustion! Press OK to start again!`);
 					location.reload();
 				}
@@ -154,6 +156,7 @@ class Tomo {
 			tomoScope.boredom++;	//directly affecting constructor
 			$("#boredomMetric").html(`Boredom: ${tomoScope.boredom}`);
 				if (tomoScope.boredom === 11) {
+					$('img').css("transform", "rotate(90deg");
 					alert(`You have let ${tomoScope.name} die of boredom! Press OK to start again!`);
 					location.reload();
 				}
